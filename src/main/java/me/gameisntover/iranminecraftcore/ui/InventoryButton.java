@@ -7,7 +7,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 
-import static me.gameisntover.iranmcreportsspigot.util.StringUtil.color;
+import static me.gameisntover.iranminecraftcore.util.StringUtil.color;
+
 
 public abstract class InventoryButton extends ItemStack {
     protected InventoryButton(XMaterial mat, String name) {

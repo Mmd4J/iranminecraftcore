@@ -11,7 +11,7 @@ public abstract class IranMinecraftPlugin extends JavaPlugin {
     protected CommandMap commandMap;
     public void registerCommand(IRCommand command){
         commandMap.register("iranminecraft",command);
-        String perm = "iranminecraft.tickets." + getName();
+        String perm = "iranminecraft.tickets." + command.getName();
         if (Bukkit.getPluginManager().getPermission(perm) == null)
             Bukkit.getPluginManager().addPermission(new Permission(perm));
         Permission permission = Bukkit.getPluginManager().getPermission(perm);
@@ -28,4 +28,6 @@ public abstract class IranMinecraftPlugin extends JavaPlugin {
     public static IranMinecraftPlugin getInstance() {
         return instance;
     }
+
+
 }

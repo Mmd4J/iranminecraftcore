@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import static me.gameisntover.iranmcreportsspigot.util.StringUtil.color;
+import static me.gameisntover.iranminecraftcore.util.StringUtil.color;
 
 public class InventoryGUI {
     private final Inventory inventory;

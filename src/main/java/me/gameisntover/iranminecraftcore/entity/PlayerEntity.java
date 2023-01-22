@@ -1,5 +1,7 @@
 package me.gameisntover.iranminecraftcore.entity;
 
+import me.gameisntover.iranminecraftcore.plugin.IranMinecraftPlugin;
+import me.gameisntover.iranminecraftcore.plugin.channel.IRChannel;
 import me.gameisntover.iranminecraftcore.response.TextResponse;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -15,31 +17,22 @@ import java.util.UUID;
 import static me.gameisntover.iranminecraftcore.util.StringUtil.color;
 
 
-public class PlayerImpl<T> implements PlayerInfo{
+public class PlayerEntity implements PlayerInfo{
 
-    private static Map<UUID, T> playerMap = new HashMap<>();
+    private static Map<UUID, PlayerEntity> playerMap = new HashMap<>();
     private final UUID uuid;
 
     private boolean staff;
     private boolean online;
 
-    protected PlayerImpl(UUID uuid) {
+    protected PlayerEntity(UUID uuid) {
         this.uuid = uuid;
     }
 
-    @Override
-    public boolean canOpenTicket() {
-        return getPlayer().hasPermission("iranminecraft.ticket.open");
-    }
 
     @Override
     public boolean isStaff() {
         return staff;
-    }
-
-    @Override
-    public boolean canAnswerTicket() {
-        return getPlayer().hasPermission("iranminecraft.ticket.answer");
     }
 
     @Override
@@ -56,12 +49,12 @@ public class PlayerImpl<T> implements PlayerInfo{
     }
 
 
-    public static PlayerImpl of(UUID uuid){
-        if (!playerMap.containsKey(uuid)) playerMap.put(uuid,new PlayerImpl(uuid));
+    public static PlayerEntity of(UUID uuid){
+        if (!playerMap.containsKey(uuid)) playerMap.put(uuid,new PlayerEntity(uuid));
         return playerMap.get(uuid);
     }
 
-    public static PlayerImpl of(Player player){
+    public static PlayerEntity of(Player player){
         return of(player.getUniqueId());
     }
 
@@ -80,7 +73,7 @@ public class PlayerImpl<T> implements PlayerInfo{
     }
 
 
-    public void teleport(PlayerImpl player) {
+    public void teleport(PlayerEntity player) {
         getPlayer().teleport(player.getPlayer());
     }
 
@@ -97,5 +90,17 @@ public class PlayerImpl<T> implements PlayerInfo{
 
     public void playSound(Sound sound,float vol,float pitch) {
     getPlayer().playSound(getLocation(),sound,vol,pitch);
+    }
+
+    public boolean hasPermission(String perm){
+        return getPlayer().hasPermission(perm);
+    }
+
+    public void teleport(Location loc){
+        getPlayer().teleport(loc);
+    }
+
+    public void sendData(byte[] b, IRChannel channel) {
+        getPlayer().sendPluginMessage(IranMinecraftPlugin.getInstance(), channel.getName(), b);
     }
 }

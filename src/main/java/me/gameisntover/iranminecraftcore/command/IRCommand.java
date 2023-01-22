@@ -1,7 +1,6 @@
 package me.gameisntover.iranminecraftcore.command;
 
-import me.gameisntover.iranmcreportsspigot.IranMCReportsSpigot;
-import me.gameisntover.iranmcreportsspigot.player.PlayerImpl;
+import me.gameisntover.iranminecraftcore.entity.PlayerEntity;
 import me.gameisntover.iranminecraftcore.plugin.IranMinecraftPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -39,18 +38,18 @@ public abstract class IRCommand extends Command implements PluginIdentifiableCom
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         if (sender.hasPermission(getBukkitPermission())) return false;
-        else return perform(PlayerImpl.of((Player) sender), args);
+        else return perform(PlayerEntity.of((Player) sender), args);
     }
 
-    public abstract boolean perform(PlayerImpl sender, String[] args);
+    public abstract boolean perform(PlayerEntity sender, String[] args);
 
-    public List<String> performTab(PlayerImpl sender, String[] args) {
+    public List<String> performTab(PlayerEntity sender, String[] args) {
         return new ArrayList<>();
     }
 
     @Override
     public List<String> tabComplete(CommandSender sender, String alias, String[] args) throws IllegalArgumentException {
-        List<String> list = performTab(PlayerImpl.of((Player) sender), args);
+        List<String> list = performTab(PlayerEntity.of((Player) sender), args);
         if (list.isEmpty()) return super.tabComplete(sender, alias, args);
         else {
             List<String> l = new ArrayList<>();

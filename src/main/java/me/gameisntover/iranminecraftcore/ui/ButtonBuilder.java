@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import static me.gameisntover.iranmcreportsspigot.util.StringUtil.color;
+import static me.gameisntover.iranminecraftcore.util.StringUtil.color;
 
 public class ButtonBuilder {
     private XMaterial material = XMaterial.GRAY_STAINED_GLASS_PANE;
